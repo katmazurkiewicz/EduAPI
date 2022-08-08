@@ -12,5 +12,10 @@ namespace EduAPI.Data.Context
         public EduContext(DbContextOptions<EduContext> options)
             : base(options)
         { }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Seed();
+        }
     }
 }

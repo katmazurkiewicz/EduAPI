@@ -12,6 +12,5 @@
         public int TypeId { get; set; }
         public DateTime PublishedAt { get; set; }
         public IEnumerable<Review> Reviews { get; set; }
-
     }
 }
