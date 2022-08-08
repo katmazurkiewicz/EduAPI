@@ -10,11 +10,11 @@
   <ItemGroup>
     <Folder Include="Models\DTOs\" />
     <Folder Include="Models\Exceptions\" />
-    <Folder Include="Profiles\" />
-    <Folder Include="Services\Interfaces\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.7">
@@ -22,6 +22,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EduAPI.Data\EduAPI.Data.csproj" />
   </ItemGroup>
 
 </Project>
