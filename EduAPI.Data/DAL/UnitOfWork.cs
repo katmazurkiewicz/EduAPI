@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EduAPI.Data.DAL
 {
-    public class UnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private EduContext _context;
 
