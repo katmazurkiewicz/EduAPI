@@ -30,9 +30,6 @@ namespace EduAPI.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CreatedTotal")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -49,28 +46,24 @@ namespace EduAPI.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedTotal = 1,
                             Description = "Co-founder of the prestigious \"Women in IT\" summit.",
                             Name = "Priscillia Chang"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedTotal = 1,
                             Description = "A known Udemy coach.",
                             Name = "Alex Green"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedTotal = 1,
                             Description = "Programming course provider.",
                             Name = "Get Coding Inc."
                         },
                         new
                         {
                             Id = 4,
-                            CreatedTotal = 1,
                             Description = "Local API guru.",
                             Name = "Anne X"
                         });
@@ -153,6 +146,26 @@ namespace EduAPI.Data.Migrations
                             PublishedAt = new DateTime(2022, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "My first DB",
                             TypeId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AuthorId = 1,
+                            Description = "Stop making silly mistakes",
+                            Location = "\"Women in IT\" magazine, issue 17",
+                            PublishedAt = new DateTime(2020, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Effective mapping",
+                            TypeId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AuthorId = 4,
+                            Description = "Build your first database in EF Core",
+                            Location = "Left on a bench in Park Jordana",
+                            PublishedAt = new DateTime(2012, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "EF Core for dummies",
+                            TypeId = 4
                         });
                 });
 

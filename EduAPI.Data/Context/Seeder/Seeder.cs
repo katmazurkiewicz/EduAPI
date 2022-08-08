@@ -16,7 +16,7 @@ public static class Seeder
             Id = 1,
             Name = "Priscillia Chang",
             Description = "Co-founder of the prestigious \"Women in IT\" summit.",
-            CreatedTotal = 1
+            //CreatedTotal = 1
         }
         );
 
@@ -25,7 +25,7 @@ public static class Seeder
             Id = 2,
             Name = "Alex Green",
             Description = "A known Udemy coach.",
-            CreatedTotal = 1
+            //CreatedTotal = 1
         }
         );
 
@@ -34,7 +34,7 @@ public static class Seeder
             Id = 3,
             Name = "Get Coding Inc.",
             Description = "Programming course provider.",
-            CreatedTotal = 1
+            //CreatedTotal = 1
         }
         );
 
@@ -43,7 +43,7 @@ public static class Seeder
             Id = 4,
             Name = "Anne X",
             Description = "Local API guru.",
-            CreatedTotal = 1
+            //CreatedTotal = 1
         }
         );
 
@@ -92,6 +92,28 @@ public static class Seeder
             Location = "getcoding.com/efcore",
             TypeId = 1,
             PublishedAt = new DateTime(2022, 03, 18)
+        }
+        );
+        materials.Add(new Material()
+        {
+            Id = 5,
+            AuthorId = 1,
+            Title = "Effective mapping",
+            Description = "Stop making silly mistakes",
+            Location = "\"Women in IT\" magazine, issue 17",
+            TypeId = 2,
+            PublishedAt = new DateTime(2020, 05, 05)
+        }
+        );
+        materials.Add(new Material()
+        {
+            Id = 6,
+            AuthorId = 4,
+            Title = "EF Core for dummies",
+            Description = "Build your first database in EF Core",
+            Location = "Left on a bench in Park Jordana",
+            TypeId = 4,
+            PublishedAt = new DateTime(2012, 02, 10)
         }
         );
 

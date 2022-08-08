@@ -16,8 +16,7 @@ namespace EduAPI.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedTotal = table.Column<int>(type: "int", nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -91,13 +90,13 @@ namespace EduAPI.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Authors",
-                columns: new[] { "Id", "CreatedTotal", "Description", "Name" },
+                columns: new[] { "Id", "Description", "Name" },
                 values: new object[,]
                 {
-                    { 1, 1, "Co-founder of the prestigious \"Women in IT\" summit.", "Priscillia Chang" },
-                    { 2, 1, "A known Udemy coach.", "Alex Green" },
-                    { 3, 1, "Programming course provider.", "Get Coding Inc." },
-                    { 4, 1, "Local API guru.", "Anne X" }
+                    { 1, "Co-founder of the prestigious \"Women in IT\" summit.", "Priscillia Chang" },
+                    { 2, "A known Udemy coach.", "Alex Green" },
+                    { 3, "Programming course provider.", "Get Coding Inc." },
+                    { 4, "Local API guru.", "Anne X" }
                 });
 
             migrationBuilder.InsertData(
@@ -119,7 +118,9 @@ namespace EduAPI.Data.Migrations
                     { 1, 2, "For baby ASP .NET programmers", "udemy.com", new DateTime(2021, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Build an ASP .NET MVC app", 3 },
                     { 2, 1, "A useful set of tips.", "getstarted.com/article.html", new DateTime(2022, 8, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Get started in IT", 2 },
                     { 3, 4, "An exhaustive guide for beginner and moderately-skilled programmers.", "Rajska library", new DateTime(2020, 5, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "Everything you need to know about APIs", 4 },
-                    { 4, 3, "Build your first database in EF Core", "getcoding.com/efcore", new DateTime(2022, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "My first DB", 1 }
+                    { 4, 3, "Build your first database in EF Core", "getcoding.com/efcore", new DateTime(2022, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "My first DB", 1 },
+                    { 5, 1, "Stop making silly mistakes", "\"Women in IT\" magazine, issue 17", new DateTime(2020, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Effective mapping", 2 },
+                    { 6, 4, "Build your first database in EF Core", "Left on a bench in Park Jordana", new DateTime(2012, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "EF Core for dummies", 4 }
                 });
 
             migrationBuilder.InsertData(
