@@ -1,4 +1,4 @@
-﻿namespace EduAPI.Data.DAL.Repositories.Interfaces
+﻿namespace EduAPI.Data.DAL.Interfaces
 {
     public interface ICudRepo<T> where T : class
     {

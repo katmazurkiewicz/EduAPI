@@ -1,5 +1,5 @@
 ﻿using EduAPI.Data.Context;
-using EduAPI.Data.DAL.Repositories.Interfaces;
+using EduAPI.Data.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduAPI.Data.DAL.Repositories
