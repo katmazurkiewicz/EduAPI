@@ -37,13 +37,19 @@ namespace EduAPI.Services
             return _mapper.Map<ReadReviewDTO>(newReview);
         }
 
-        public async Task UpdateAsync(int id, JsonPatchDocument reviewPatch)
+        public async Task UpdateAsync(int id, WriteReviewDTO dto)
         {
             var reviewToUpdate = await _unitOfWork.Reviews.GetSingleAsync(id);
             if (reviewToUpdate is null)
                 throw new ResourceNotFoundException($"Review with id {id} not found");
-
-            reviewPatch.ApplyTo(reviewToUpdate);
+            var newMaterial = await _unitOfWork.Materials.GetSingleAsync(dto.MaterialId);
+            if (newMaterial is null)
+                throw new ResourceNotFoundException($"Material with id {id} not found");
+            var update = _mapper.Map<Review>(dto);
+            reviewToUpdate.MaterialId = update.MaterialId;
+            reviewToUpdate.Contents = update.Contents;
+            reviewToUpdate.Points = update.Points;
+            _unitOfWork.Reviews.Update(reviewToUpdate);
             await _unitOfWork.CompleteUnitAsync();
         }
 

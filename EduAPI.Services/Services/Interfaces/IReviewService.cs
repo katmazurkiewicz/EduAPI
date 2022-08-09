@@ -10,7 +10,7 @@ namespace EduAPI.Services.Interfaces
 
         public Task<ReadReviewDTO> CreateAsync(WriteReviewDTO dto);
 
-        public Task UpdateAsync(int id, JsonPatchDocument materialPatch);
+        public Task UpdateAsync(int id, WriteReviewDTO dto);
 
         public Task DeleteAsync(int id);
     }

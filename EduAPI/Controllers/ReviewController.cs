@@ -38,10 +38,10 @@ namespace EduAPI.Controllers
             return CreatedAtRoute(nameof(GetReviewAsync), new { id = newReview.Id }, newReview);
         }
         [SwaggerOperation(Summary = "Updates Review by ID")]
-        [HttpPatch("{id}")]
-        public async Task<IActionResult> UpdateAsync(int id, JsonPatchDocument reviewPatch)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateAsync(int id, WriteReviewDTO dto)
         {
-            await _service.UpdateAsync(id, reviewPatch);
+            await _service.UpdateAsync(id, dto);
             return NoContent();
         }
 
