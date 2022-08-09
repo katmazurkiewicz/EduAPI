@@ -11,7 +11,7 @@ namespace EduAPI.Data.DAL
         public IAuthorRepository Authors { get; }
         public IMaterialRepository Materials { get; }
         public ITypeRepository Types { get; }
-        //public IReviewRepository Reviews { get; }
+        public IReviewRepository Reviews { get; }
 
         public UnitOfWork(EduContext context)
         {
@@ -19,7 +19,7 @@ namespace EduAPI.Data.DAL
             Authors = new AuthorRepository(_context);
             Materials = new MaterialRepository(_context);
             Types = new TypeRepository(_context);
-            //Reviews = new ReviewRepository(_context);
+            Reviews = new ReviewRepository(_context);
         }
 
         public async Task<int> CompleteUnitAsync()
