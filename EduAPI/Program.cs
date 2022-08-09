@@ -2,6 +2,7 @@ using AutoMapper;
 using EduAPI.Data.Context;
 using EduAPI.Data.DAL;
 using EduAPI.Data.DAL.Interfaces;
+using EduAPI.Middlewares;
 using EduAPI.Services;
 using EduAPI.Services.Interfaces;
 using System.Reflection;
@@ -17,6 +18,7 @@ builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<IMaterialService, MaterialService>();
 builder.Services.AddScoped<ITypeService, TypeService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<ExceptionHandlerMiddleware>();
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAutoMapper(Assembly.Load("EduAPI.Services"));
@@ -38,7 +40,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseCors();
 app.UseHttpsRedirection();
-
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -3,6 +3,7 @@ using EduAPI.Data.DAL.Interfaces;
 using EduAPI.Data.Entities;
 using EduAPI.Services.Interfaces;
 using EduAPI.Services.Models.DTOs;
+using EduAPI.Services.Models.Exceptions;
 
 namespace EduAPI.Services
 {
@@ -18,8 +19,8 @@ namespace EduAPI.Services
         public async Task<ReadAuthorDTO> GetSingleAsync(int id)
         {
             var author = await _unitOfWork.Authors.GetSingleAsync(id);
-            //if (author is null)
-            //    throw new ResourceNotFoundException($"Author with id {id} not found");
+            if (author is null)
+               throw new ResourceNotFoundException($"Author with id {id} not found");
             return _mapper.Map<ReadAuthorDTO>(author);
         }
         public async Task<IEnumerable<ReadAuthorDTO>> GetAllAsync()
@@ -31,7 +32,8 @@ namespace EduAPI.Services
         public async Task<IEnumerable<ReadMaterialDTO>> GetTopMaterialsAsync(int id)
         {
             var author = await _unitOfWork.Authors.GetSingleWithDetailsAsync(id);
-            //if (author is null) throw exception
+            if (author is null)
+                throw new ResourceNotFoundException($"Author with id {id} not found");
             var topMaterials = new List<Material>();
             foreach (var material in author.Materials)
             {
@@ -45,7 +47,8 @@ namespace EduAPI.Services
                     if (reviewValues.Average() > 5) topMaterials.Add(material);
                 }
             }
-            //if topmaterials is empty throw exception
+            if (topMaterials is null || topMaterials.Count == 0)
+               throw new ResourceNotFoundException($"No materials with avg rating over 5 for Author with id {id}");
             return _mapper.Map<IEnumerable<ReadMaterialDTO>>(topMaterials);
         }
         public async Task<IEnumerable<ReadAuthorDTO>> GetMostProductiveAsync()
@@ -53,7 +56,8 @@ namespace EduAPI.Services
             var authorList = await _unitOfWork.Authors.GetAllWithDetailsAsync();
             authorList = authorList.OrderByDescending(a => a.CreatedTotal).ToList();
             var topAuthor = authorList.FirstOrDefault();
-            //exception here
+            if (topAuthor is null)
+                throw new ResourceNotFoundException($"No Authors in database");
             var topList = authorList.Where(a => a.CreatedTotal == topAuthor.CreatedTotal);
             return _mapper.Map <IEnumerable<ReadAuthorDTO>>(topList);
         }

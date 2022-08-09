@@ -2,6 +2,8 @@
 using EduAPI.Data.DAL.Interfaces;
 using EduAPI.Services.Interfaces;
 using EduAPI.Services.Models.DTOs;
+using EduAPI.Services.Models.Exceptions;
+using Microsoft.Extensions.Logging;
 
 namespace EduAPI.Services
 {
@@ -9,16 +11,19 @@ namespace EduAPI.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public TypeService(IUnitOfWork unitOfWork, IMapper mapper)
+        
+        public TypeService(IUnitOfWork unitOfWork, IMapper mapper, ILogger logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            
         }
         public async Task<ReadTypeDTO> GetSingleAsync(int id)
         {
             var type = await _unitOfWork.Types.GetSingleAsync(id);
-            //if (type is null)
-            //    throw new ResourceNotFoundException($"Type with id {id} not found");
+            if (type is null)
+                throw new ResourceNotFoundException($"Type with id {id} not found");
+            
             return _mapper.Map<ReadTypeDTO>(type);
         }
         public async Task<IEnumerable<ReadTypeDTO>> GetAllAsync()
