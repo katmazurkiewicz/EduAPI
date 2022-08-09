@@ -1,7 +1,4 @@
-﻿using EduAPI.Data.Entities;
-using Microsoft.EntityFrameworkCore;
-
-namespace EduAPI.Data.Context
+﻿namespace EduAPI.Data.Context
 {
     public class EduContext : DbContext
     {

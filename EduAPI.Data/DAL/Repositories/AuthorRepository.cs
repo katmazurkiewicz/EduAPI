@@ -1,9 +1,4 @@
-﻿using EduAPI.Data.Context;
-using EduAPI.Data.DAL.Interfaces;
-using EduAPI.Data.Entities;
-using Microsoft.EntityFrameworkCore;
-
-namespace EduAPI.Data.DAL.Repositories
+﻿namespace EduAPI.Data.DAL.Repositories
 {
     public class AuthorRepository: IAuthorRepository
     {

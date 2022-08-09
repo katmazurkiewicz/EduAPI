@@ -1,5 +1,4 @@
-﻿using EduAPI.Data.Entities;
-namespace EduAPI.Data.DAL.Interfaces
+﻿namespace EduAPI.Data.DAL.Interfaces
 {
     public interface ITypeRepository : IReadRepo<MatType>
     {

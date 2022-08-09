@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace AuthData
+﻿namespace AuthData
 {
     public class UserRepo
     {
