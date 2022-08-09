@@ -32,6 +32,7 @@ namespace EduAPI.Controllers
 
             [SwaggerOperation(Summary = "Returns all Materials for given Type")]
             [HttpGet("{id}/materials", Name = "GetTypeMaterialsAsync")]
+            [Authorize(Roles = "admin")]
             public async Task<IActionResult> GetTypeMaterialsAsync(int id)
             {
                 return Ok(await _service.GetTypeMaterialsAsync(id));

@@ -1,5 +1,6 @@
 ﻿using EduAPI.Services.Interfaces;
 using EduAPI.Services.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -8,6 +9,7 @@ namespace EduAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class MaterialController : ControllerBase
     {
         private readonly IMaterialService _service;
@@ -32,6 +34,7 @@ namespace EduAPI.Controllers
         }
         [SwaggerOperation(Summary = "Creates new Material")]
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> CreateAsync(WriteMaterialDTO dto)
         {
             var newMaterial = await _service.CreateAsync(dto);
@@ -39,6 +42,7 @@ namespace EduAPI.Controllers
         }
         [SwaggerOperation(Summary = "Updates Material by ID")]
         [HttpPatch("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> UpdateAsync(int id, JsonPatchDocument materialPatch)
         {
             await _service.UpdateAsync(id, materialPatch);
@@ -47,6 +51,7 @@ namespace EduAPI.Controllers
 
         [SwaggerOperation(Summary = "Deletes Material by ID")]
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             await _service.DeleteAsync(id);

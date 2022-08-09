@@ -1,4 +1,5 @@
 ﻿using EduAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -6,6 +7,7 @@ namespace EduAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AuthorController : ControllerBase
     {
         private readonly IAuthorService _service;
@@ -31,6 +33,7 @@ namespace EduAPI.Controllers
         [SwaggerOperation(Summary = "Returns all Author materials with avg rating over 5")]
         [HttpGet]
         [Route("{id}/topmaterials")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetTopMaterialsAsync(int id)
         {
             return Ok(await _service.GetTopMaterialsAsync(id));
@@ -38,6 +41,7 @@ namespace EduAPI.Controllers
         [SwaggerOperation(Summary ="Gets author(s) with most materials")]
         [HttpGet]
         [Route("mostproductive")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetMostProductiveAsync()
         {
             return Ok(await _service.GetMostProductiveAsync());
