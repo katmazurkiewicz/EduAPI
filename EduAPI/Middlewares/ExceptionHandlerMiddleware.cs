@@ -1,8 +1,4 @@
-﻿using EduAPI.Services.Models.Exceptions;
-using System.Net;
-using Serilog;
-
-namespace EduAPI.Middlewares
+﻿namespace EduAPI.Middlewares
 {
     public class ExceptionHandlerMiddleware : IMiddleware
     {

@@ -1,14 +1,4 @@
-﻿using AuthData;
-using EduAPI.Services.Models.DTOs.Users;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-
-namespace EduAPI.Controllers
+﻿namespace EduAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -1,11 +1,4 @@
-﻿using EduAPI.Services.Interfaces;
-using EduAPI.Services.Models.DTOs;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.JsonPatch;
-using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
-
-namespace EduAPI.Controllers
+﻿namespace EduAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

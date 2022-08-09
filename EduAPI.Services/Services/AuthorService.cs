@@ -42,7 +42,7 @@ namespace EduAPI.Services
             foreach (var material in author.Materials)
             {
                 var reviewValues = new List<int>();
-                if (material.Reviews != null && material.Reviews.Count() > 0)
+                if (material.Reviews != null && material.Reviews.Any())
                 {
                     foreach (var review in material.Reviews)
                     {
