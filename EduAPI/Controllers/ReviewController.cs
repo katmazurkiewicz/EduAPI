@@ -1,5 +1,6 @@
 ﻿using EduAPI.Services.Interfaces;
 using EduAPI.Services.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -8,6 +9,7 @@ namespace EduAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ReviewController : ControllerBase
     {
         private readonly IReviewService _service;
@@ -47,6 +49,7 @@ namespace EduAPI.Controllers
 
         [SwaggerOperation(Summary = "Deletes Review by ID")]
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             await _service.DeleteAsync(id);

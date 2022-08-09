@@ -1,5 +1,6 @@
 ﻿using AuthData;
 using EduAPI.Services.Models.DTOs.Users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -22,7 +23,7 @@ namespace EduAPI.Controllers
             _userRepo = new(context);
         }
         [HttpPost("register")]
-        //this will be for admin role only
+        [Authorize(Roles="admin")]
         public async Task<ActionResult<User>> RegisterAdmin(UserDTO request)
         {   
             var test = _userRepo.GetSingle(request.Username);
@@ -31,8 +32,8 @@ namespace EduAPI.Controllers
             var admin = new User();
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
             admin.Username = request.Username;
-            admin.PasswordHash = Encoding.UTF8.GetString(passwordHash);
-            admin.PasswordSalt = Encoding.UTF8.GetString(passwordSalt);
+            admin.PasswordHash = passwordHash;
+            admin.PasswordSalt = passwordSalt;
             admin.Role = "admin";
             _userRepo.Create(admin);
             return Ok(admin);
@@ -45,9 +46,8 @@ namespace EduAPI.Controllers
             {
                 return BadRequest("User not found");
             }
-            var hashBytes = Encoding.UTF8.GetBytes(test.PasswordHash);
-            var saltBytes = Encoding.UTF8.GetBytes(test.PasswordSalt);
-            if (!VerifyPasswordHash(test, request.Password, hashBytes, saltBytes))
+            
+            if (!VerifyPasswordHash(test, request.Password, test.PasswordHash, test.PasswordSalt))
             {
                 return BadRequest("Wrong password");
             }
@@ -84,8 +84,8 @@ namespace EduAPI.Controllers
         }
         private bool VerifyPasswordHash(User user, string password, byte[] passwordHash, byte[] passwordSalt)
         {
-            var saltBytes = Encoding.UTF8.GetBytes(user.PasswordSalt);
-            using (var hmac = new HMACSHA512(saltBytes))
+            
+            using (var hmac = new HMACSHA512(user.PasswordSalt))
             {
                 var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
                 return computedHash.SequenceEqual(passwordHash);

@@ -1,4 +1,3 @@
-using AutoMapper;
 using EduAPI.Data.Context;
 using EduAPI.Data.DAL;
 using EduAPI.Data.DAL.Interfaces;
@@ -11,6 +10,8 @@ using System.Reflection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using AuthData;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,7 +37,17 @@ builder.Services.AddLogging(loggingBuilder =>
     .CreateLogger();
 });
 builder.Services.AddAutoMapper(Assembly.Load("EduAPI.Services"));
-builder.Services.AddSwaggerGen(c => { c.EnableAnnotations(); });
+builder.Services.AddSwaggerGen(o => {
+    o.EnableAnnotations();
+    o.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
+        Description = "Authorization header using Bearer scheme",
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+    });
+    o.OperationFilter<SecurityRequirementsOperationFilter>();
+});
 builder.Services.AddCors(o => o.AddDefaultPolicy(builder => {
     builder.AllowAnyOrigin()
            .AllowAnyMethod()
