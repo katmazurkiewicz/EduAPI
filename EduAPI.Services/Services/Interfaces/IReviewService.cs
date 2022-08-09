@@ -1,7 +1,4 @@
-﻿using EduAPI.Services.Models.DTOs;
-using Microsoft.AspNetCore.JsonPatch;
-
-namespace EduAPI.Services.Interfaces
+﻿namespace EduAPI.Services.Interfaces
 {
     public interface IReviewService
     {

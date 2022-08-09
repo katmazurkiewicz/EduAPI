@@ -1,6 +1,4 @@
-﻿using EduAPI.Services.Models.DTOs;
-
-namespace EduAPI.Services.Interfaces
+﻿namespace EduAPI.Services.Interfaces
 {
     public interface IAuthorService
     {

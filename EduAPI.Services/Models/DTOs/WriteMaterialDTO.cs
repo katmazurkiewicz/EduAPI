@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace EduAPI.Services.Models.DTOs
+﻿namespace EduAPI.Services.Models.DTOs
 {
     public class WriteMaterialDTO
     {

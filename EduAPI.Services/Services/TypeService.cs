@@ -1,11 +1,4 @@
-﻿using AutoMapper;
-using EduAPI.Data.DAL.Interfaces;
-using EduAPI.Services.Interfaces;
-using EduAPI.Services.Models.DTOs;
-using EduAPI.Services.Models.Exceptions;
-using Serilog;
-
-namespace EduAPI.Services
+﻿namespace EduAPI.Services
 {
     public class TypeService: ITypeService
     {
