@@ -18,8 +18,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddSqlServer<EduContext>(builder.Configuration.GetConnectionString("EduDB"));
-builder.Services.AddSqlServer<AuthContext>(builder.Configuration.GetConnectionString("AuthDB"));
+var eduDBconnectionString = builder.Configuration["ConnectionStrings:EduDB"];
+var authDBconnectionString = builder.Configuration["ConnectionStrings:AuthDB"];
+builder.Services.AddSqlServer<EduContext>(eduDBconnectionString);
+builder.Services.AddSqlServer<AuthContext>(authDBconnectionString);
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<IMaterialService, MaterialService>();
@@ -59,7 +61,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-                    .GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
+                    .GetBytes(builder.Configuration.GetSection("JWTsettings:Token").Value)),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
