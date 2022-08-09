@@ -5,6 +5,7 @@ using EduAPI.Data.DAL.Interfaces;
 using EduAPI.Middlewares;
 using EduAPI.Services;
 using EduAPI.Services.Interfaces;
+using Serilog;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,8 +20,16 @@ builder.Services.AddScoped<IMaterialService, MaterialService>();
 builder.Services.AddScoped<ITypeService, TypeService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<ExceptionHandlerMiddleware>();
+//builder.Services.AddScoped<Serilog.ILogger, Serilog.Lo>();
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddLogging(loggingBuilder =>
+{
+    loggingBuilder.AddSeq();
+    Log.Logger = new LoggerConfiguration()
+    .WriteTo.Seq("http://localhost:5341")
+    .CreateLogger();
+});
 builder.Services.AddAutoMapper(Assembly.Load("EduAPI.Services"));
 builder.Services.AddSwaggerGen(c => { c.EnableAnnotations(); });
 builder.Services.AddCors(o => o.AddDefaultPolicy(builder => {
@@ -30,7 +39,9 @@ builder.Services.AddCors(o => o.AddDefaultPolicy(builder => {
 }));
 
 var app = builder.Build();
-
+//Log.Logger = new LoggerConfiguration()
+//    .WriteTo.Seq("http://localhost:5341")
+//    .CreateLogger();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
