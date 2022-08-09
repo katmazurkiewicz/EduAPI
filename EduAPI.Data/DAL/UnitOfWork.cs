@@ -10,7 +10,7 @@ namespace EduAPI.Data.DAL
 
         public IAuthorRepository Authors { get; }
         public IMaterialRepository Materials { get; }
-        //public IMatTypeRepository Types { get; }
+        public ITypeRepository Types { get; }
         //public IReviewRepository Reviews { get; }
 
         public UnitOfWork(EduContext context)
@@ -18,8 +18,7 @@ namespace EduAPI.Data.DAL
             _context = context;
             Authors = new AuthorRepository(_context);
             Materials = new MaterialRepository(_context);
-            //Types = new MatTypeRepository(_context);
-            //Seasons = new SeasonRepository(_context);
+            Types = new TypeRepository(_context);
             //Reviews = new ReviewRepository(_context);
         }
 

@@ -10,7 +10,7 @@ namespace EduAPI.Data.DAL.Interfaces
     {
         public IAuthorRepository Authors { get; }
         public IMaterialRepository Materials { get; }
-        //public IMatTypeRepository Types { get; }
+        public ITypeRepository Types { get; }
         //public IReviewRepository Reviews { get; }
 
         public  Task<int> CompleteUnitAsync();
