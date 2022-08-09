@@ -26,7 +26,6 @@ builder.Services.AddScoped<IMaterialService, MaterialService>();
 builder.Services.AddScoped<ITypeService, TypeService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<ExceptionHandlerMiddleware>();
-//builder.Services.AddScoped<Serilog.ILogger, Serilog.Lo>();
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddLogging(loggingBuilder =>

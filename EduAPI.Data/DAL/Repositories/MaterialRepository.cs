@@ -7,8 +7,6 @@ namespace EduAPI.Data.DAL.Repositories
 {
     public class MaterialRepository: IMaterialRepository
     {
-        //public MaterialRepository(EduContext context) : base(context)
-        //{}
         protected EduContext _context;
         public MaterialRepository (EduContext context)
         {
@@ -18,7 +16,6 @@ namespace EduAPI.Data.DAL.Repositories
         {
             _context.Materials.Add(material);
         }
-
 
         public void Update(Material material)
         {

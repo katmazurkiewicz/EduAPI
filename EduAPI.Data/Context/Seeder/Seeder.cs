@@ -15,8 +15,7 @@ public static class Seeder
         {
             Id = 1,
             Name = "Priscillia Chang",
-            Description = "Co-founder of the prestigious \"Women in IT\" summit.",
-            //CreatedTotal = 1
+            Description = "Co-founder of the prestigious \"Women in IT\" summit."
         }
         );
 
@@ -24,8 +23,7 @@ public static class Seeder
         {
             Id = 2,
             Name = "Alex Green",
-            Description = "A known Udemy coach.",
-            //CreatedTotal = 1
+            Description = "A known Udemy coach."
         }
         );
 
@@ -33,8 +31,7 @@ public static class Seeder
         {
             Id = 3,
             Name = "Get Coding Inc.",
-            Description = "Programming course provider.",
-            //CreatedTotal = 1
+            Description = "Programming course provider."
         }
         );
 
@@ -42,8 +39,7 @@ public static class Seeder
         {
             Id = 4,
             Name = "Anne X",
-            Description = "Local API guru.",
-            //CreatedTotal = 1
+            Description = "Local API guru."
         }
         );
 

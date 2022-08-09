@@ -6,7 +6,7 @@ namespace EduAPI.Data.DAL
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private EduContext _context;
+        private readonly EduContext _context;
 
         public IAuthorRepository Authors { get; }
         public IMaterialRepository Materials { get; }
