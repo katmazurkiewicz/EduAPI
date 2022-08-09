@@ -52,5 +52,24 @@
             _logger.Information($"User deleted Material with id {id}");
             await _unitOfWork.CompleteUnitAsync();
         }
+        public async Task PutAsync(int id, WriteMaterialDTO dto)
+        {
+            var materialToUpdate = await _unitOfWork.Materials.GetSingleAsync(id);
+            if (materialToUpdate is null)
+                throw new ResourceNotFoundException($"Material with id {id} not found");
+            var newAuthor = await _unitOfWork.Authors.GetSingleAsync(dto.AuthorId);
+            if (newAuthor is null)
+                throw new ResourceNotFoundException($"Author with id {id} not found");
+            var newType = await _unitOfWork.Types.GetSingleAsync(dto.TypeId);
+            if (newType is null)
+                throw new ResourceNotFoundException($"Author with id {id} not found");
+            var update = _mapper.Map<Material>(dto);
+            materialToUpdate.AuthorId = update.AuthorId;
+            materialToUpdate.TypeId = update.TypeId;
+            materialToUpdate.Title = update.Title;
+            _unitOfWork.Materials.Update(materialToUpdate);
+            _logger.Information($"User updated Material with id {id}");
+            await _unitOfWork.CompleteUnitAsync();
+        }
     }
 }

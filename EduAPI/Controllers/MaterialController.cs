@@ -41,6 +41,14 @@
             await _service.UpdateAsync(id, materialPatch);
             return NoContent();
         }
+        [SwaggerOperation(Summary = "Updates Material by ID")]
+        [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> PutAsync(int id, WriteMaterialDTO dto)
+        {
+            await _service.PutAsync(id, dto);
+            return NoContent();
+        }
 
         [SwaggerOperation(Summary = "Deletes Material by ID")]
         [HttpDelete("{id}")]

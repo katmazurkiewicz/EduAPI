@@ -10,6 +10,8 @@
         public Task UpdateAsync(int id, JsonPatchDocument materialPatch);
 
         public Task DeleteAsync(int id);
-        
+        public Task PutAsync(int id, WriteMaterialDTO dto);
+
+
     }
 }
