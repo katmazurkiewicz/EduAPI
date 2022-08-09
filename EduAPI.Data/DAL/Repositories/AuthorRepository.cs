@@ -23,19 +23,26 @@ namespace EduAPI.Data.DAL.Repositories
         }
         public async Task<IEnumerable<Material>> GetTopMaterialsAsync(int id)
         {
-            var author = await _context.Authors.FindAsync(id);
+            var author = await _context.Authors
+                                    .Include(a => a.Materials)
+                                    .ThenInclude(m => m.Reviews)
+                                    .FirstOrDefaultAsync(a => a.Id == id);
+            //if autor is null throw exception
             var topMaterials = new List<Material>();
             foreach(var material in author.Materials)
             {
                 var reviewValues = new List<int>();
-                foreach (var review in material.Reviews)
+                if (material.Reviews != null && material.Reviews.Count() > 0)
                 {
-                    reviewValues.Add(review.Points);
+                    foreach (var review in material.Reviews)
+                    {
+                        reviewValues.Add(review.Points);
+                    }
+                    if (reviewValues.Average() > 5) topMaterials.Add(material);
                 }
-                if (reviewValues.Average()>5) topMaterials.Add(material);
             }
+            //if topmaterials is empty throw exception
             return topMaterials;
-
         }
         public async Task<IEnumerable<Author>> GetMostProductiveAsync()
         {

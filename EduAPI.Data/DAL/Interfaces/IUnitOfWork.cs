@@ -9,7 +9,7 @@ namespace EduAPI.Data.DAL.Interfaces
     public interface IUnitOfWork
     {
         public IAuthorRepository Authors { get; }
-        //public IMaterialRepository Materials { get; }
+        public IMaterialRepository Materials { get; }
         //public IMatTypeRepository Types { get; }
         //public IReviewRepository Reviews { get; }
 

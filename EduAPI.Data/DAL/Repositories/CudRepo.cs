@@ -12,9 +12,9 @@ namespace EduAPI.Data.DAL.Repositories
             _context = context;
         }
         public void Add(T entity)
-        {
+        =>
             _context.Set<T>().Add(entity);
-        }
+        
 
         public void Update(T entity)
         {

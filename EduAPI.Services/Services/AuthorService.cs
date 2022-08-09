@@ -26,11 +26,11 @@ namespace EduAPI.Services
             var authors = await _unitOfWork.Authors.GetAllAsync();
             return _mapper.Map<IEnumerable<ReadAuthorDTO>>(authors);
         }
-        //public async Task<IEnumerable<ReadMaterialDTO>> GetTopMaterialsAsync(int id)
-        //{
-        //    var materials = await _unitOfWork.Authors.GetTopMaterialsAsync(id);
-        //    return _mapper.Map<IEnumerable<ReadMaterialDTO>>(materials);
-        //}
+        public async Task<IEnumerable<ReadMaterialDTO>> GetTopMaterialsAsync(int id)
+        {
+            var materials = await _unitOfWork.Authors.GetTopMaterialsAsync(id);
+            return _mapper.Map<IEnumerable<ReadMaterialDTO>>(materials);
+        }
         public async Task<IEnumerable<ReadAuthorDTO>> GetMostProductiveAsync()
         {
             var topauthors = await _unitOfWork.Authors.GetMostProductiveAsync();

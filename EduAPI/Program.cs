@@ -5,6 +5,7 @@ using EduAPI.Data.DAL.Interfaces;
 using EduAPI.Services;
 using EduAPI.Services.Interfaces;
 using System.Reflection;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,9 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddSqlServer<EduContext>(builder.Configuration.GetConnectionString("EduDB"));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-//builder.Services.AddScoped<IMapper, Mapper>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
+builder.Services.AddScoped<IMaterialService, MaterialService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAutoMapper(Assembly.Load("EduAPI.Services"));
 //builder.Services.AddAutoMapper(typeof(Program));
