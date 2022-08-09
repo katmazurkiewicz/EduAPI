@@ -17,12 +17,15 @@ builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<IMaterialService, MaterialService>();
 builder.Services.AddScoped<ITypeService, TypeService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAutoMapper(Assembly.Load("EduAPI.Services"));
-//builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddSwaggerGen(c => { c.EnableAnnotations(); });
+builder.Services.AddCors(o => o.AddDefaultPolicy(builder => {
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+}));
 
 var app = builder.Build();
 
@@ -33,7 +36,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.UseDeveloperExceptionPage();
 }
-
+app.UseCors();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
