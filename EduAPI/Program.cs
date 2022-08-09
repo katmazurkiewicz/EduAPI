@@ -5,8 +5,12 @@ using EduAPI.Data.DAL.Interfaces;
 using EduAPI.Middlewares;
 using EduAPI.Services;
 using EduAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Serilog;
 using System.Reflection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using AuthData;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +18,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddSqlServer<EduContext>(builder.Configuration.GetConnectionString("EduDB"));
+builder.Services.AddSqlServer<AuthContext>(builder.Configuration.GetConnectionString("AuthDB"));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<IMaterialService, MaterialService>();
@@ -37,12 +42,20 @@ builder.Services.AddCors(o => o.AddDefaultPolicy(builder => {
            .AllowAnyMethod()
            .AllowAnyHeader();
 }));
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+                    .GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
 
 var app = builder.Build();
-//Log.Logger = new LoggerConfiguration()
-//    .WriteTo.Seq("http://localhost:5341")
-//    .CreateLogger();
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -52,6 +65,9 @@ if (app.Environment.IsDevelopment())
 app.UseCors();
 app.UseHttpsRedirection();
 app.UseMiddleware<ExceptionHandlerMiddleware>();
+
+app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();
