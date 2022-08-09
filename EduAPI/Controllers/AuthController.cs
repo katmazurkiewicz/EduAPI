@@ -53,7 +53,7 @@
 
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-                _configuration.GetSection("AppSettings:Token").Value));
+                _configuration.GetSection("JWTsettings:Token").Value));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
             var token = new JwtSecurityToken(
                 claims: claims,
@@ -64,7 +64,7 @@
             return jwt;
         }
 
-        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512())
             {
@@ -72,7 +72,7 @@
                 passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
             }
         }
-        private bool VerifyPasswordHash(User user, string password, byte[] passwordHash, byte[] passwordSalt)
+        private static bool VerifyPasswordHash(User user, string password, byte[] passwordHash, byte[] passwordSalt)
         {
             
             using (var hmac = new HMACSHA512(user.PasswordSalt))
