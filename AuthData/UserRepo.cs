@@ -11,11 +11,12 @@ namespace AuthData
         }
         public User GetSingle(string username)
         {
-            return  _context.Users.Find(username);
+            return  _context.Users.FirstOrDefault(u => u.Username == username);
         }
         public void Create(User user)
         {
             _context.Users.Add(user);
+            _context.SaveChanges();
         }
         
     }

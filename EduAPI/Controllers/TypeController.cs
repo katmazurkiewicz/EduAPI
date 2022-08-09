@@ -1,4 +1,5 @@
 ﻿using EduAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -6,6 +7,7 @@ namespace EduAPI.Controllers
 {
         [Route("api/[controller]")]
         [ApiController]
+        [Authorize]
         public class TypeController : ControllerBase
         {
             private readonly ITypeService _service;
